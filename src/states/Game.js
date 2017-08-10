@@ -10,6 +10,7 @@ export default class extends Phaser.State {
     let ground = this.add.graphics(0,0)
     ground.beginFill(0x4e8f35)
     ground.drawRect(0,this.world.height - 100,this.world.width,100)
+    this.add.image(10,10,'arrowKeys')
 
     this.player = new Player({
       game: this.game,

@@ -17,6 +17,7 @@ export default class extends Phaser.State {
     // load your assets
     //
     this.loadSprite('stick')
+    this.load.image('arrowKeys', './assets/images/arrow-keys.png')
   }
 
   create () {
