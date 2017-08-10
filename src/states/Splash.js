@@ -10,8 +10,12 @@ export default class extends Phaser.State {
     centerGameObjects([this.loaderBg, this.loaderBar])
 
     this.load.setPreloadSprite(this.loaderBar)
-    this.game.physics.startSystem(Phaser.Physics.P2JS);
-    this.game.load.physics('stick','assets/physics/stick.json')
+    
+    // remove progress bar when its done
+    this.load.onLoadComplete.add( () => {
+      this.loaderBar.kill();
+      this.loaderBg.kill();
+    });
 
     //
     // load your assets
@@ -21,7 +25,18 @@ export default class extends Phaser.State {
   }
 
   create () {
-    this.state.start('Game')
+    this.intro = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Mulligan Madness!", {'font': '42px Bangers', fill: '#4B0082'} );
+    this.startText = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Press Space to Start", {'font': '24px Bangers', fill: '#4B0082'} );
+    centerGameObjects( [this.intro, this.startText] );
+    this.startText.alignTo(this.intro, Phaser.BOTTOM_CENTER);
+    
+    this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+  }
+  
+  update () {
+    if (this.spaceKey.isDown){
+      this.state.start('Game');
+    }
   }
 
   loadSprite(name) {

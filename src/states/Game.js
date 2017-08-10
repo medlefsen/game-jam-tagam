@@ -4,7 +4,10 @@ import Player from '../sprites/Player'
 
 export default class extends Phaser.State {
   init () {}
-  preload () {}
+  preload () {
+    this.game.physics.startSystem(Phaser.Physics.P2JS);
+    this.game.load.physics('stick','assets/physics/stick.json');
+  }
 
   create () {
     let ground = this.add.graphics(0,0)
