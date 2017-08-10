@@ -13,10 +13,14 @@ export default class extends Phaser.State {
     //
     // load your assets
     //
-    this.load.image('mushroom', 'assets/images/mushroom2.png')
+    this.loadSprite('stick')
   }
 
   create () {
     this.state.start('Game')
+  }
+
+  loadSprite(name) {
+    this.load.atlasJSONHash(name, 'assets/animation/'+name+'.png', 'assets/animation/'+name+'.json')
   }
 }
