@@ -19,7 +19,7 @@ export default class extends Phaser.State {
     })
     this.enemy = new Player({
       game: this.game,
-      x: this.world.centerX + 200,
+      x: this.world.centerX + 300,
       y: this.world.height - 150
     })
     this.game.add.existing(this.player)
@@ -27,27 +27,48 @@ export default class extends Phaser.State {
     this.player.body.collides([this.enemy])
     this.enemy.body.collides([this.player])
     this.cursors = this.input.keyboard.createCursorKeys()
+    this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    
+    // make the sprite steady when it moves
+    this.enemy.body.setZeroDamping();
+	  this.enemy.body.fixedRotation = true;
   }
 
   update() {
     this.player.body.setZeroVelocity()
+    
+    //move enemy
+    let closeToPlayerRight = this.player.x + this.player.width;
+    if( this.enemy.x > closeToPlayerRight ){
+      this.enemy.body.moveLeft(100);
+    }else{
+      this.enemy.body.setZeroVelocity();
+    }
 
     if (this.cursors.left.isDown)
     {
-      this.player.body.moveLeft(30);
+      this.player.body.moveLeft(130);
     }
     else if (this.cursors.right.isDown)
     {
-      this.player.body.moveRight(30);
+      this.player.body.moveRight(130);
     }
 
     if (this.cursors.up.isDown)
     {
-      this.player.body.moveUp(30);
+      this.player.body.moveUp(130);
     }
     else if (this.cursors.down.isDown)
     {
-      this.player.body.moveDown(30);
+      this.player.body.moveDown(130);
+    }
+    
+    // Press space when the enemy is close, and you get a hit!
+    if (this.spaceKey.isDown)
+    {
+      if( this.enemy.x <= closeToPlayerRight ){
+        this.enemy.kill();
+      }
     }
   }
 
