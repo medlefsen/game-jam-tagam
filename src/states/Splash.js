@@ -10,6 +10,9 @@ export default class extends Phaser.State {
     centerGameObjects([this.loaderBg, this.loaderBar])
 
     this.load.setPreloadSprite(this.loaderBar)
+    this.game.physics.startSystem(Phaser.Physics.P2JS);
+    this.game.load.physics('stick','assets/physics/stick.json')
+
     //
     // load your assets
     //

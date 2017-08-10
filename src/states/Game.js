@@ -14,11 +14,40 @@ export default class extends Phaser.State {
     this.player = new Player({
       game: this.game,
       x: this.world.centerX,
-      y: this.world.height - 220
+      y: this.world.height - 150
+    })
+    this.enemy = new Player({
+      game: this.game,
+      x: this.world.centerX + 200,
+      y: this.world.height - 150
     })
     this.game.add.existing(this.player)
+    this.game.add.existing(this.enemy)
+    this.player.body.collides([this.enemy])
+    this.enemy.body.collides([this.player])
+    this.cursors = this.input.keyboard.createCursorKeys()
   }
 
-  render () {
+  update() {
+    this.player.body.setZeroVelocity()
+
+    if (this.cursors.left.isDown)
+    {
+      this.player.body.moveLeft(30);
+    }
+    else if (this.cursors.right.isDown)
+    {
+      this.player.body.moveRight(30);
+    }
+
+    if (this.cursors.up.isDown)
+    {
+      this.player.body.moveUp(30);
+    }
+    else if (this.cursors.down.isDown)
+    {
+      this.player.body.moveDown(30);
+    }
   }
+
 }
