@@ -1,7 +1,6 @@
 language: node_js
 node_js: node
-script: yarn test
-before_deploy: yarn deploy
+script: yarn deploy
 deploy:
   local_dir: web
   provider: pages
