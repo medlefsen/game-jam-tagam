@@ -199,6 +199,10 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">walk_left/0001.png</key>
+            <key type="filename">walk_left/0002.png</key>
+            <key type="filename">walk_left/0003.png</key>
+            <key type="filename">walk_left/0004.png</key>
             <key type="filename">walk_right/0001.png</key>
             <key type="filename">walk_right/0002.png</key>
             <key type="filename">walk_right/0003.png</key>
@@ -219,6 +223,7 @@
         <key>fileList</key>
         <array>
             <filename>walk_right</filename>
+            <filename>walk_left</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
