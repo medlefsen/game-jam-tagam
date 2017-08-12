@@ -44,6 +44,7 @@ export default class extends Character {
 
   hit() {
     this.state = 'hit'
+    this.animations.paused = true
     this.body.fixedRotation = false
     this.fixedY = false
     this.outOfBoundsKill = true
