@@ -28,18 +28,18 @@ export default class extends Phaser.State {
 
   create () {
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    let title = this.addText("Mulligan Madness!", '42px Bangers', '#4B0082')
+    let title = this.addText("Mulligan Madness!", '42px Cabin Sketch', '#4B0082')
     let action = "Start"
     if(this.gameState === 'won') {
-      this.addTextAbove(title,"You Won!", '26px Bangers', '#820900')
+      this.addTextAbove(title,"You Won!", '26px Cabin Sketch', '#820900')
       action = 'Start Again'
     } else if(this.gameState === 'lost') {
-      this.addTextAbove(title,"You Lost!", '26px Bangers', '#820900')
+      this.addTextAbove(title,"You Lost!", '26px Cabin Sketch', '#820900')
       action = 'Start Again'
     }
 
-    let start = this.addTextBelow(title,"Press Space to "+action, '24px Bangers', '#4B0082')
-    this.addTextBelow(start,"Attack with left and right arrows", '24px Bangers', '#4B0082')
+    let start = this.addTextBelow(title,"Press Space to "+action, '24px Cabin Sketch', '#4B0082')
+    this.addTextBelow(start,"Attack with left and right arrows", '24px Cabin Sketch', '#4B0082')
   }
 
   addTextBelow(pos,content,font,color) {

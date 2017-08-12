@@ -3,6 +3,8 @@ import Phaser from 'phaser'
 import Player from '../sprites/Player'
 import Enemy from '../sprites/Enemy'
 
+import config from '../config'
+
 export default class extends Phaser.State {
   init () {}
   preload () {}
@@ -20,14 +22,17 @@ export default class extends Phaser.State {
     this.enemyCG = this.game.physics.p2.createCollisionGroup();
     this.playerCG = this.game.physics.p2.createCollisionGroup();
 
-    this.spawnEnemy = true
-    this.enemiesLeft = 20
     this.enemies = this.game.add.group()
     this.createPlayer()
 
-    this.enemyText = this.game.add.text(5, 0, this.enemiesLeft, {'font': '50px Bangers', fill: '#d93a27'} );
+    // setupWave will set the text
+    this.enemyText = this.game.add.text(5, 0, "", {'font': '50px Bangers', fill: '#d93a27'} );
     this.enemyText.padding.set(30,0)
     this.enemyText.dirty = true
+    
+    this.wave = 1;
+    this.setupWave( this.wave );
+    
     let healthBarOutline = this.add.graphics(this.world.width - 300,25)
     healthBarOutline.lineStyle(3,0x000000,0xFFFFFF)
     healthBarOutline.drawRoundedRect(0, 0, 250, 30,5)
@@ -73,10 +78,11 @@ export default class extends Phaser.State {
   killedEnemy(enemy) {
     this.enemies.removeChild(enemy)
     const left = this.enemies.length + this.enemiesLeft
+    this.enemyText.setText(left)
+    // wait a second, then start a new wave
     if(left === 0) {
-      this.state.start('Splash',true,false,'won')
-    } else {
-      this.enemyText.setText(left)
+      this.waveCompleted();
+      //this.state.start('Splash',true,false,'won')
     }
   }
 
@@ -120,5 +126,39 @@ export default class extends Phaser.State {
     let width = Math.round((this.player.health / this.player.maxHealth) * 250)
     this.healthBar.beginFill(0xd93a27)
     this.healthBar.drawRoundedRect(0,0,width-2,28,5)
+  }
+  
+  setupWave( waveNumber ){
+    this.enemiesLeft = waveNumber * config.waveSize;
+    this.spawnEnemy = true;
+    this.enemyText.setText( this.enemiesLeft );
+  }
+  
+  waveCompleted(){
+    let content = "Wave " + this.wave + " Complete!";
+    let text = this.game.make.text(this.game.world.centerX, this.game.world.centerY, content, {'font': '50px Bangers', fill: '#d93a27'} );
+    text.anchor.setTo(0.5);
+    text.alpha = 0.0;
+    this.game.world.add( text );
+    this.game.add.tween( text ).to( { alpha: 1 }, 2000, "Linear", true);
+    
+    let counter = 5;
+    let countDownMsg = this.game.make.text(0, 0, "Next Wave In " + counter, {'font': '50px Bangers', fill: '#d93a27'} );
+    countDownMsg.alignTo( text, Phaser.BOTTOM_CENTER );
+    countDownMsg.alpha = 0.0;
+    this.game.add.tween( countDownMsg ).to( { alpha: 1 }, 2000, "Linear", true);
+    this.game.world.add( countDownMsg );
+    let interval = setInterval( () => {
+      counter--;
+      countDownMsg.setText( "Next Wave In " + counter );
+      
+      if( counter === 0 ){
+        clearInterval( interval );
+        this.wave++;
+        this.setupWave( this.wave );
+        text.destroy();
+        countDownMsg.destroy();
+      }
+    }, 1000 );
   }
 }
