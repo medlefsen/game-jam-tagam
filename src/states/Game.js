@@ -61,18 +61,19 @@ export default class extends Phaser.State {
   }
 
   killedEnemy(enemy) {
-    this.enemies.splice(this.enemies.indexOf(enemy),1)
+    this.enemies.removeChild(enemy)
     if(this.enemies.length === 0 && this.enemiesLeft === 0) {
       this.state.start('Splash',true,false,true)
     }
   }
 
-  createEnemy(dir) {
+  createEnemy(side) {
     let x = 500
-    if(dir === 'right') x = -x;
+    if(side === 'left') x = -x;
     let enemy = new Enemy({
       game: this.game,
       x: this.world.centerX + x,
+      player: this.player,
     })
     enemy.setCollisionGroup(this.enemyCG)
     enemy.collides([this.playerCG])
@@ -81,11 +82,6 @@ export default class extends Phaser.State {
     })
     this.game.add.existing(enemy)
     this.enemies.push(enemy)
-    if(dir === 'left') {
-      enemy.walkLeft()
-    } else {
-      enemy.walkRight()
-    }
   }
 
   createPlayer() {

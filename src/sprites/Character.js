@@ -8,6 +8,7 @@ export default class extends Phaser.Sprite {
     this.game.physics.p2.enable([this], false);
     this.body.fixedRotation = true
     this.addAnimations()
+    this.range = 110
   }
 
   setCollisionGroup(cg) {
@@ -50,10 +51,10 @@ export default class extends Phaser.Sprite {
   }
 
   canHitLeft(other) {
-    return other.x < this.x && other.x > (this.x - 100)
+    return other.x < this.x && other.x > (this.x - this.range)
   }
 
   canHitRight(other) {
-    return other.x > this.x && other.x < (this.x + 100)
+    return other.x > this.x && other.x < (this.x + this.range)
   }
 }
