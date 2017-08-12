@@ -22,7 +22,7 @@ export default class extends Phaser.State {
 
     this.spawnEnemy = true
     this.enemiesLeft = 20
-    this.enemies = []
+    this.enemies = this.game.add.group()
     this.createPlayer()
 
     this.cursors = this.input.keyboard.createCursorKeys()
@@ -34,13 +34,13 @@ export default class extends Phaser.State {
 
     // Press left when the enemy is close, and you get a hit!
     if (this.cursors.left.isDown) {
-      for(let enemy of this.enemies) {
+      for(let enemy of this.enemies.children) {
         if(this.player.canHitLeft(enemy)) {
           enemy.hitLeft();
         }
       }
     } else if (this.cursors.right.isDown) {
-      for(let enemy of this.enemies) {
+      for(let enemy of this.enemies.children) {
         if (this.player.canHitRight(enemy)) {
           enemy.hitRight();
         }
@@ -81,7 +81,8 @@ export default class extends Phaser.State {
        this.killedEnemy(enemy)
     })
     this.game.add.existing(enemy)
-    this.enemies.push(enemy)
+    this.enemies.add(enemy)
+    this.enemies.sort('y',Phaser.Group.SORT_ASCENDING)
   }
 
   createPlayer() {
