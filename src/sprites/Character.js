@@ -35,4 +35,12 @@ export default class extends Phaser.Sprite {
     this.body.clearShapes()
     this.body.loadPolygon(this.key, this.frameName)
   }
+
+  canHitLeft(other) {
+    return other.x < this.x && other.x > (this.x - 100)
+  }
+
+  canHitRight(other) {
+    return other.x > this.x && other.x < (this.x + 100)
+  }
 }

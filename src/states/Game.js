@@ -12,7 +12,6 @@ export default class extends Phaser.State {
     let ground = this.add.graphics(0,0)
     ground.beginFill(0x4e8f35)
     ground.drawRect(0,this.world.height - 100,this.world.width,100)
-    this.add.image(10,10,'arrowKeys')
 
     this.game.physics.p2.updateBoundsCollisionGroup();
     let enemyCG = this.game.physics.p2.createCollisionGroup();
@@ -40,33 +39,15 @@ export default class extends Phaser.State {
 
   update() {
     this.player.body.setZeroVelocity()
-    
-    let closeToPlayerLeft = this.player.x - this.player.width;
-    let closeToPlayerRight = this.player.x + this.player.width;
 
-    if (this.cursors.left.isDown)
-    {
-      this.player.body.moveLeft(130);
-    }
-    else if (this.cursors.right.isDown)
-    {
-      this.player.body.moveRight(130);
-    }
-
-    if (this.cursors.up.isDown)
-    {
-      this.player.body.moveUp(130);
-    }
-    else if (this.cursors.down.isDown)
-    {
-      this.player.body.moveDown(130);
-    }
-    
-    // Press space when the enemy is close, and you get a hit!
-    if (this.spaceKey.isDown)
-    {
-      if( this.enemy.x >= closeToPlayerLeft){
+    // Press left when the enemy is close, and you get a hit!
+    if (this.cursors.left.isDown) {
+      if(this.player.canHitLeft(this.enemy)) {
         this.enemy.hitLeft();
+      }
+    } else if (this.cursors.right.isDown) {
+      if(this.player.canHitRight(this.enemy)) {
+        this.enemy.hitRight();
       }
     }
   }
