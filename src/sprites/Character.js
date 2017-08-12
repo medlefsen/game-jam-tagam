@@ -1,13 +1,21 @@
 import Phaser from 'phaser'
 
 export default class extends Phaser.Sprite {
-  constructor(game, x, y, name, initial) {
+  constructor(game, x, name, initial) {
+    let y = game.world.height - 150;
     super(game,x,y,name,initial)
+    this.fixedY = y
     this.game.physics.p2.enable([this], false);
-    // this.body.setZeroDamping()
     this.body.fixedRotation = true
     this.addAnimations()
-    this.updatePhysics()
+  }
+
+  setCollisionGroup(cg) {
+    this.cg = cg
+  }
+
+  collides(cgs) {
+    this.cgs = cgs
   }
 
   addAnimations() {
@@ -29,11 +37,16 @@ export default class extends Phaser.Sprite {
 
   update() {
     this.updatePhysics()
+    if(this.fixedY) {
+      this.body.y = this.fixedY
+    }
   }
 
   updatePhysics() {
     this.body.clearShapes()
     this.body.loadPolygon(this.key, this.frameName)
+    this.body.setCollisionGroup(this.cg)
+    this.body.collides(this.cgs)
   }
 
   canHitLeft(other) {

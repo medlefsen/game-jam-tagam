@@ -13,29 +13,18 @@ export default class extends Phaser.State {
     ground.beginFill(0x4e8f35)
     ground.drawRect(0,this.world.height - 100,this.world.width,100)
 
-    this.game.physics.p2.updateBoundsCollisionGroup();
-    let enemyCG = this.game.physics.p2.createCollisionGroup();
-    let playerCG = this.game.physics.p2.createCollisionGroup();
+    this.game.physics.p2.applyGravity = true
+    this.game.physics.p2.gravity.y = 400
 
-    this.player = new Player({
-      game: this.game,
-      x: this.world.centerX,
-      y: this.world.height - 150
-    })
-    this.player.body.setCollisionGroup(playerCG)
-    this.enemy = new Enemy({
-      game: this.game,
-      x: this.world.centerX - 400,
-      y: this.world.height - 150
-    })
-    this.enemy.body.setCollisionGroup(enemyCG)
-    this.game.add.existing(this.player)
-    this.game.add.existing(this.enemy)
-    this.player.body.collides([enemyCG])
-    this.enemy.body.collides([playerCG])
-    this.enemy.events.onKilled.add(() => {
-      this.state.start('Splash',true,false,true)
-    })
+    this.game.physics.p2.updateBoundsCollisionGroup();
+    this.enemyCG = this.game.physics.p2.createCollisionGroup();
+    this.playerCG = this.game.physics.p2.createCollisionGroup();
+
+    this.spawnEnemy = true
+    this.enemiesLeft = 20
+    this.enemies = []
+    this.createPlayer()
+
     this.cursors = this.input.keyboard.createCursorKeys()
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
   }
@@ -45,14 +34,67 @@ export default class extends Phaser.State {
 
     // Press left when the enemy is close, and you get a hit!
     if (this.cursors.left.isDown) {
-      if(this.player.canHitLeft(this.enemy)) {
-        this.enemy.hitLeft();
+      for(let enemy of this.enemies) {
+        if(this.player.canHitLeft(enemy)) {
+          enemy.hitLeft();
+        }
       }
     } else if (this.cursors.right.isDown) {
-      if(this.player.canHitRight(this.enemy)) {
-        this.enemy.hitRight();
+      for(let enemy of this.enemies) {
+        if (this.player.canHitRight(enemy)) {
+          enemy.hitRight();
+        }
+      }
+    }
+
+    if(this.spawnEnemy) {
+      this.spawnEnemy = false
+      this.createEnemy(this.game.rnd.pick(['left','right']))
+      this.enemiesLeft -= 1
+      if(this.enemiesLeft > 0) {
+        let nextSpawn = this.game.rnd.realInRange(0.2,2.0)
+        this.time.events.add(1000 * nextSpawn, () => {
+          this.spawnEnemy = true
+        })
       }
     }
   }
 
+  killedEnemy(enemy) {
+    this.enemies.splice(this.enemies.indexOf(enemy),1)
+    if(this.enemies.length === 0 && this.enemiesLeft === 0) {
+      this.state.start('Splash',true,false,true)
+    }
+  }
+
+  createEnemy(dir) {
+    let x = 500
+    if(dir === 'right') x = -x;
+    let enemy = new Enemy({
+      game: this.game,
+      x: this.world.centerX + x,
+    })
+    enemy.setCollisionGroup(this.enemyCG)
+    enemy.collides([this.playerCG])
+    enemy.events.onKilled.add(() => {
+       this.killedEnemy(enemy)
+    })
+    this.game.add.existing(enemy)
+    this.enemies.push(enemy)
+    if(dir === 'left') {
+      enemy.walkLeft()
+    } else {
+      enemy.walkRight()
+    }
+  }
+
+  createPlayer() {
+    this.player = new Player({
+      game: this.game,
+      x: this.world.centerX,
+    })
+    this.player.setCollisionGroup(this.playerCG)
+    this.player.collides([this.enemyCG])
+    this.game.add.existing(this.player)
+  }
 }
