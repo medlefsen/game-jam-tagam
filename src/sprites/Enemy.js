@@ -9,12 +9,12 @@ export default class extends Character {
 
   walkRight() {
     this.state = 'walk_right'
-    this.animations.play('walk_right',8,true)
+    this.animations.play('walk_right',12,true)
   }
 
   walkLeft() {
     this.state = 'walk_left'
-    this.animations.play('walk_left',8,true)
+    this.animations.play('walk_left',12,true)
   }
 
   hitLeft() {
