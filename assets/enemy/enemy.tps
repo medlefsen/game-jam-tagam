@@ -199,14 +199,46 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">strike_left/0001.png</key>
+            <key type="filename">strike_left/0002.png</key>
+            <key type="filename">strike_left/0003.png</key>
+            <key type="filename">strike_left/0004.png</key>
+            <key type="filename">strike_left/0005.png</key>
+            <key type="filename">strike_left/0006.png</key>
+            <key type="filename">strike_right/0001.png</key>
+            <key type="filename">strike_right/0002.png</key>
+            <key type="filename">strike_right/0003.png</key>
+            <key type="filename">strike_right/0004.png</key>
+            <key type="filename">strike_right/0005.png</key>
+            <key type="filename">strike_right/0006.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>45,50,90,100</rect>
+                <key>scale9Paddings</key>
+                <rect>45,50,90,100</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">walk_left/0001.png</key>
             <key type="filename">walk_left/0002.png</key>
             <key type="filename">walk_left/0003.png</key>
             <key type="filename">walk_left/0004.png</key>
+            <key type="filename">walk_left/0005.png</key>
+            <key type="filename">walk_left/0006.png</key>
+            <key type="filename">walk_left/0007.png</key>
+            <key type="filename">walk_left/0008.png</key>
             <key type="filename">walk_right/0001.png</key>
             <key type="filename">walk_right/0002.png</key>
             <key type="filename">walk_right/0003.png</key>
             <key type="filename">walk_right/0004.png</key>
+            <key type="filename">walk_right/0005.png</key>
+            <key type="filename">walk_right/0006.png</key>
+            <key type="filename">walk_right/0007.png</key>
+            <key type="filename">walk_right/0008.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -224,6 +256,8 @@
         <array>
             <filename>walk_right</filename>
             <filename>walk_left</filename>
+            <filename>strike_right</filename>
+            <filename>strike_left</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
