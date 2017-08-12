@@ -22,12 +22,12 @@ export default class extends Character {
 
   strikeRight() {
     this.state = 'strike_right'
-    this.animations.play('strike_right',14,true)
+    this.animations.play('strike_right',14,false)
   }
 
   strikeLeft() {
     this.state = 'strike_left'
-    this.animations.play('strike_left',14,true)
+    this.animations.play('strike_left',14,false)
   }
 
   hitLeft() {
@@ -61,6 +61,15 @@ export default class extends Character {
       this.body.moveRight(190)
     } else if(this.state === 'walk_left') {
       this.body.moveLeft(190)
+    } else if(this.state.match(/strike/)) {
+      let anim = this.animations.currentAnim
+      if(anim.isFinished) {
+        if(!anim.isReversed) {
+          this.damagePlayer()
+        }
+        anim.reverse()
+        anim.play()
+      }
     }
   }
 
@@ -76,5 +85,9 @@ export default class extends Character {
         if(this.state !== 'walk_left') this.walkLeft()
       }
     }
+  }
+
+  damagePlayer() {
+    this.player.damage(5)
   }
 }

@@ -25,6 +25,14 @@ export default class extends Phaser.State {
     this.enemies = this.game.add.group()
     this.createPlayer()
 
+    this.enemyText = this.game.add.text(5, 0, this.enemiesLeft, {'font': '50px Bangers', fill: '#d93a27'} );
+    this.enemyText.padding.set(30,0)
+    this.enemyText.dirty = true
+    let healthBarOutline = this.add.graphics(this.world.width - 300,25)
+    healthBarOutline.lineStyle(3,0x000000,0xFFFFFF)
+    healthBarOutline.drawRoundedRect(0, 0, 250, 30,5)
+    this.healthBar = this.add.graphics(healthBarOutline.x+1,healthBarOutline.y+1)
+
     this.cursors = this.input.keyboard.createCursorKeys()
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
   }
@@ -58,13 +66,22 @@ export default class extends Phaser.State {
         })
       }
     }
+
+    this.updateHealthBar()
   }
 
   killedEnemy(enemy) {
     this.enemies.removeChild(enemy)
-    if(this.enemies.length === 0 && this.enemiesLeft === 0) {
-      this.state.start('Splash',true,false,true)
+    const left = this.enemies.length + this.enemiesLeft
+    if(left === 0) {
+      this.state.start('Splash',true,false,'won')
+    } else {
+      this.enemyText.setText(left)
     }
+  }
+
+  killedPlayer() {
+    this.state.start('Splash',true,false,'lost')
   }
 
   createEnemy(side) {
@@ -90,8 +107,18 @@ export default class extends Phaser.State {
       game: this.game,
       x: this.world.centerX,
     })
+    this.player.events.onKilled.add(() => {
+      this.killedPlayer()
+    })
     this.player.setCollisionGroup(this.playerCG)
     this.player.collides([this.enemyCG])
     this.game.add.existing(this.player)
+  }
+
+  updateHealthBar() {
+    this.healthBar.clear()
+    let width = Math.round((this.player.health / this.player.maxHealth) * 250)
+    this.healthBar.beginFill(0xd93a27)
+    this.healthBar.drawRoundedRect(0,0,width-2,28,5)
   }
 }

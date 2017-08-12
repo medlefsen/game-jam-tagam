@@ -5,5 +5,6 @@ export default class extends Character {
     super(game,x,'stick','wave/0000.png')
     this.animations.play('wave',30,true);
     this.body.static = true
+    this.maxHealth = this.health = 100
   }
 }

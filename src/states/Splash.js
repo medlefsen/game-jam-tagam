@@ -2,9 +2,8 @@ import Phaser from 'phaser'
 import { centerGameObjects } from '../utils'
 
 export default class extends Phaser.State {
-  init (won) {
-    this.lastText = false
-    this.won = !!won
+  init (state) {
+    this.gameState = state
   }
 
   preload () {
@@ -31,8 +30,11 @@ export default class extends Phaser.State {
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     let title = this.addText("Mulligan Madness!", '42px Bangers', '#4B0082')
     let action = "Start"
-    if(this.won) {
+    if(this.gameState === 'won') {
       this.addTextAbove(title,"You Won!", '26px Bangers', '#820900')
+      action = 'Start Again'
+    } else if(this.gameState === 'lost') {
+      this.addTextAbove(title,"You Lost!", '26px Bangers', '#820900')
       action = 'Start Again'
     }
 
