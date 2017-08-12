@@ -33,6 +33,9 @@ export default class extends Phaser.State {
     this.game.add.existing(this.enemy)
     this.player.body.collides([enemyCG])
     this.enemy.body.collides([playerCG])
+    this.enemy.events.onKilled.add(() => {
+      this.state.start('Splash',true,false,true)
+    })
     this.cursors = this.input.keyboard.createCursorKeys()
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
   }
