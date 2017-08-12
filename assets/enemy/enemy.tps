@@ -205,24 +205,12 @@
             <key type="filename">strike_left/0004.png</key>
             <key type="filename">strike_left/0005.png</key>
             <key type="filename">strike_left/0006.png</key>
-            <key type="filename">strike_left/0007.png</key>
-            <key type="filename">strike_left/0008.png</key>
-            <key type="filename">strike_left/0009.png</key>
-            <key type="filename">strike_left/0010.png</key>
-            <key type="filename">strike_left/0011.png</key>
-            <key type="filename">strike_left/0012.png</key>
             <key type="filename">strike_right/0001.png</key>
             <key type="filename">strike_right/0002.png</key>
             <key type="filename">strike_right/0003.png</key>
             <key type="filename">strike_right/0004.png</key>
             <key type="filename">strike_right/0005.png</key>
             <key type="filename">strike_right/0006.png</key>
-            <key type="filename">strike_right/0007.png</key>
-            <key type="filename">strike_right/0008.png</key>
-            <key type="filename">strike_right/0009.png</key>
-            <key type="filename">strike_right/0010.png</key>
-            <key type="filename">strike_right/0011.png</key>
-            <key type="filename">strike_right/0012.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
