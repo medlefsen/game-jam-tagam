@@ -20,8 +20,9 @@ export default class extends Phaser.State {
     //
     // load your assets
     //
-    this.loadSprite('stick')
     this.load.image('arrowKeys', './assets/images/arrow-keys.png')
+    this.loadCharacter('stick')
+    this.loadCharacter('enemy')
   }
 
   create () {
@@ -39,7 +40,16 @@ export default class extends Phaser.State {
     }
   }
 
+  loadCharacter(name) {
+    this.loadSprite(name)
+    this.loadPhysics(name)
+  }
+
   loadSprite(name) {
     this.load.atlasJSONHash(name, 'assets/animation/'+name+'.png', 'assets/animation/'+name+'.json')
+  }
+
+  loadPhysics(name) {
+    this.game.load.physics(name,'assets/physics/'+name+'.json')
   }
 }

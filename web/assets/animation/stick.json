@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "stick.0000.png",
+	"filename": "wave/0000.png",
 	"frame": {"x":651,"y":1,"w":61,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0001.png",
+	"filename": "wave/0001.png",
 	"frame": {"x":714,"y":1,"w":61,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0002.png",
+	"filename": "wave/0002.png",
 	"frame": {"x":510,"y":1,"w":71,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0003.png",
+	"filename": "wave/0003.png",
 	"frame": {"x":351,"y":1,"w":80,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -33,7 +33,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0004.png",
+	"filename": "wave/0004.png",
 	"frame": {"x":91,"y":1,"w":86,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -41,7 +41,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0005.png",
+	"filename": "wave/0005.png",
 	"frame": {"x":1,"y":1,"w":88,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -49,7 +49,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0006.png",
+	"filename": "wave/0006.png",
 	"frame": {"x":179,"y":1,"w":86,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -57,7 +57,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0007.png",
+	"filename": "wave/0007.png",
 	"frame": {"x":267,"y":1,"w":82,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -65,7 +65,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0008.png",
+	"filename": "wave/0008.png",
 	"frame": {"x":433,"y":1,"w":75,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -73,7 +73,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0009.png",
+	"filename": "wave/0009.png",
 	"frame": {"x":583,"y":1,"w":66,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -81,7 +81,7 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0010.png",
+	"filename": "wave/0010.png",
 	"frame": {"x":777,"y":1,"w":61,"h":140},
 	"rotated": false,
 	"trimmed": true,
@@ -89,8 +89,8 @@
 	"sourceSize": {"w":150,"h":200}
 },
 {
-	"filename": "stick.0011.png",
-	"frame": {"x":840,"y":1,"w":61,"h":140},
+	"filename": "wave/0011.png",
+	"frame": {"x":651,"y":1,"w":61,"h":140},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":48,"y":60,"w":61,"h":140},
@@ -101,8 +101,8 @@
 	"version": "1.0",
 	"image": "stick.png",
 	"format": "RGBA8888",
-	"size": {"w":902,"h":142},
+	"size": {"w":839,"h":142},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:cb79b691b9e05a5471a7b1db6929d059:73c25c34d8a500317fe494b8bb6429c4:ed5dd9d9773ccdb4925420af4dcbca53$"
+	"smartupdate": "$TexturePacker:SmartUpdate:73b5377d1001465e461a192bf7522f86:73c25c34d8a500317fe494b8bb6429c4:ed5dd9d9773ccdb4925420af4dcbca53$"
 }
 }
