@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 
 export default class extends Phaser.Sprite {
   constructor(game, x, name, initial) {
-    let y = game.world.height - 150;
+    let y = game.world.height - 200;
     super(game,x,y,name,initial)
     this.fixedY = y
     this.game.physics.p2.enable([this], false);

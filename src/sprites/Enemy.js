@@ -6,7 +6,7 @@ export default class extends Character {
     this.player = player
     this.checkWorldBounds = true
     this.body.collideWorldBounds = false
-    this.fixedY += game.rnd.integerInRange(-10,10)
+    this.fixedY += game.rnd.integerInRange(-20,20)
   }
 
   walkRight() {

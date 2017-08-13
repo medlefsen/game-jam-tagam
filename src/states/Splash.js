@@ -27,6 +27,7 @@ export default class extends Phaser.State {
   }
 
   create () {
+    this.add.image(0,0,'background')
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     let title = this.addText("Mulligan Madness!", '42px Cabin Sketch', '#4B0082')
     let action = "Start"

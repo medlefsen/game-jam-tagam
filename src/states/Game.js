@@ -11,9 +11,7 @@ export default class extends Phaser.State {
 
   create () {
     this.game.physics.startSystem(Phaser.Physics.P2JS);
-    let ground = this.add.graphics(0,0)
-    ground.beginFill(0x4e8f35)
-    ground.drawRect(0,this.world.height - 100,this.world.width,100)
+    this.add.image(0,0,'background')
 
     this.game.physics.p2.applyGravity = true
     this.game.physics.p2.gravity.y = 400
