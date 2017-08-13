@@ -127,12 +127,15 @@ export default class extends Phaser.State {
     let content = "Wave " + this.wave + " Complete!";
     let text = this.game.make.text(this.game.world.centerX, this.game.world.centerY, content, {'font': '50px Bangers', fill: '#d93a27'} );
     text.anchor.setTo(0.5);
+    text.padding.set(5,0)
+    text.dirty = true
     text.alpha = 0.0;
     this.game.world.add( text );
     this.game.add.tween( text ).to( { alpha: 1 }, 2000, "Linear", true);
     
     let counter = 5;
     let countDownMsg = this.game.make.text(0, 0, "Next Wave In " + counter, {'font': '50px Bangers', fill: '#d93a27'} );
+    countDownMsg.padding.set(5,0)
     countDownMsg.alignTo( text, Phaser.BOTTOM_CENTER );
     countDownMsg.alpha = 0.0;
     this.game.add.tween( countDownMsg ).to( { alpha: 1 }, 2000, "Linear", true);
