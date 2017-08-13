@@ -38,7 +38,7 @@ export default class extends Phaser.State {
 
     this.cursors = this.input.keyboard.createCursorKeys()
     this.pauseText = this.game.add.text(
-      this.game.world.centerX, this.game.world.centerY,
+      this.game.world.centerX, this.game.world.centerY-100,
       "PAUSED", {font: '42px Cabin Sketch', fill: '#820900'}
     )
     this.pauseText.anchor.setTo(0.5)
@@ -155,21 +155,21 @@ export default class extends Phaser.State {
     let counter = 5;
     let countDownMsg = this.game.make.text(0, 0, "Next Wave In " + counter, {'font': '50px Bangers', fill: '#d93a27'} );
     countDownMsg.padding.set(5,0)
+    countDownMsg.dirty = true
     countDownMsg.alignTo( text, Phaser.BOTTOM_CENTER );
     countDownMsg.alpha = 0.0;
     this.game.add.tween( countDownMsg ).to( { alpha: 1 }, 2000, "Linear", true);
     this.game.world.add( countDownMsg );
-    let interval = setInterval( () => {
+    let countdownEvent = this.time.events.loop(1000,() => {
       counter--;
       countDownMsg.setText( "Next Wave In " + counter );
-      
       if( counter === 0 ){
-        clearInterval( interval );
+        this.time.events.remove(countdownEvent)
         this.wave++;
         this.setupWave( this.wave );
         text.destroy();
         countDownMsg.destroy();
       }
-    }, 1000 );
+    });
   }
 }
