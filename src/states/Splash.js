@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+
 import { centerGameObjects } from '../utils'
 
 export default class extends Phaser.State {
@@ -7,6 +8,7 @@ export default class extends Phaser.State {
   }
 
   preload () {
+    this.game.background.reload()
     this.loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg')
     this.loaderBar = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBar')
     centerGameObjects([this.loaderBg, this.loaderBar])
@@ -27,7 +29,6 @@ export default class extends Phaser.State {
   }
 
   create () {
-    this.add.image(0,0,'background')
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     let title = this.addText("Mulligan Madness!", '42px Cabin Sketch', '#4B0082')
     let action = "Start"

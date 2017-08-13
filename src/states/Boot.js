@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import WebFont from 'webfontloader'
+import Background from '../sprites/Background'
 
 export default class extends Phaser.State {
   init () {
@@ -22,10 +23,14 @@ export default class extends Phaser.State {
     this.load.image('loaderBg', './assets/images/loader-bg.png')
     this.load.image('loaderBar', './assets/images/loader-bar.png')
     this.load.image('background', './assets/images/background.png')
+    this.load.image('cloud1', './assets/images/cloud1.png')
+    this.load.image('cloud2', './assets/images/cloud2.png')
+    this.load.image('cloud3', './assets/images/cloud3.png')
   }
 
   create() {
-    this.add.image(0,0,'background')
+    this.game.background = new Background(this.game)
+    this.stage.addChildAt(this.game.background,0)
   }
 
   render () {

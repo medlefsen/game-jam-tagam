@@ -10,8 +10,8 @@ export default class extends Phaser.State {
   preload () {}
 
   create () {
+    this.game.background.reload()
     this.game.physics.startSystem(Phaser.Physics.P2JS);
-    this.add.image(0,0,'background')
 
     this.game.physics.p2.applyGravity = true
     this.game.physics.p2.gravity.y = 400
