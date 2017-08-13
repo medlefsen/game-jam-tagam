@@ -22,7 +22,7 @@ export default class extends Phaser.State {
     //
     // load your assets
     //
-    this.loadCharacter('stick')
+    this.loadCharacter('player')
     this.loadCharacter('enemy')
   }
 

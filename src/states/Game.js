@@ -47,17 +47,9 @@ export default class extends Phaser.State {
 
     // Press left when the enemy is close, and you get a hit!
     if (this.cursors.left.isDown) {
-      for(let enemy of this.enemies.children) {
-        if(this.player.canHitLeft(enemy)) {
-          enemy.hitLeft();
-        }
-      }
+      this.player.strikeLeft()
     } else if (this.cursors.right.isDown) {
-      for(let enemy of this.enemies.children) {
-        if (this.player.canHitRight(enemy)) {
-          enemy.hitRight();
-        }
-      }
+      this.player.strikeRight()
     }
 
     if(this.spawnEnemy) {
@@ -99,7 +91,6 @@ export default class extends Phaser.State {
       player: this.player,
     })
     enemy.setCollisionGroup(this.enemyCG)
-    enemy.collides([this.playerCG])
     enemy.events.onKilled.add(() => {
        this.killedEnemy(enemy)
     })
@@ -112,12 +103,12 @@ export default class extends Phaser.State {
     this.player = new Player({
       game: this.game,
       x: this.world.centerX,
+      enemies: this.enemies,
     })
     this.player.events.onKilled.add(() => {
       this.killedPlayer()
     })
     this.player.setCollisionGroup(this.playerCG)
-    this.player.collides([this.enemyCG])
     this.game.add.existing(this.player)
   }
 

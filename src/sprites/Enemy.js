@@ -6,7 +6,6 @@ export default class extends Character {
     this.player = player
     this.checkWorldBounds = true
     this.body.collideWorldBounds = false
-    this.range = 80
     this.fixedY += game.rnd.integerInRange(-10,10)
   }
 

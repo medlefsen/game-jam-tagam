@@ -8,7 +8,7 @@ export default class extends Phaser.Sprite {
     this.game.physics.p2.enable([this], false);
     this.body.fixedRotation = true
     this.addAnimations()
-    this.range = 110
+    this.range = 100
   }
 
   setCollisionGroup(cg) {
@@ -46,8 +46,8 @@ export default class extends Phaser.Sprite {
   updatePhysics() {
     this.body.clearShapes()
     this.body.loadPolygon(this.key, this.frameName)
-    this.body.setCollisionGroup(this.cg)
-    this.body.collides(this.cgs)
+    if(this.cg) this.body.setCollisionGroup(this.cg)
+    if(this.cgs) this.body.collides(this.cgs)
   }
 
   canHitLeft(other) {
