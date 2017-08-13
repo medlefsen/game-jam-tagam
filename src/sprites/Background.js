@@ -12,7 +12,7 @@ export default class extends Phaser.Image {
     for(let cloud of this.children) {
       cloud.start()
     }
-    this.game.time.events.loop(5000,()=> {
+    this.game.time.events.loop(3000,()=> {
       let createCloud = this.game.rnd.between(1, 20)
       if (createCloud === 1) {
         this.createRandomCloud().start()
@@ -33,7 +33,7 @@ export default class extends Phaser.Image {
   }
 
   createRandomInitialClouds() {
-    let createNum = this.game.rnd.between(2,5)
+    let createNum = this.game.rnd.between(2,4)
     for(let i = 0; i < createNum; ++i) {
       let x = this.game.rnd.between(0,this.game.world.width)
       this.createRandomCloud(x)
