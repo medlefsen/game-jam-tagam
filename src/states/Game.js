@@ -37,7 +37,26 @@ export default class extends Phaser.State {
     this.healthBar = this.add.graphics(healthBarOutline.x+1,healthBarOutline.y+1)
 
     this.cursors = this.input.keyboard.createCursorKeys()
+    this.pauseText = this.game.add.text(
+      this.game.world.centerX, this.game.world.centerY,
+      "PAUSED", {font: '42px Cabin Sketch', fill: '#820900'}
+    )
+    this.pauseText.anchor.setTo(0.5)
+    this.pauseText.visible = false
     this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    this.spaceKey.onDown.add(()=>{
+      this.pause()
+    })
+  }
+
+  pause() {
+    if(this.game.paused) {
+      this.game.paused = false
+      this.pauseText.visible = false
+    } else {
+      this.game.paused = true
+      this.pauseText.visible = true
+    }
   }
 
   update() {
