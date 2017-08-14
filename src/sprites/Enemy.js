@@ -7,6 +7,7 @@ export default class extends Character {
     this.checkWorldBounds = true
     this.body.collideWorldBounds = false
     this.fixedY += game.rnd.integerInRange(-20,20)
+    this.speed = game.rnd.integerInRange(160,250)
   }
 
   walkRight() {
@@ -57,9 +58,9 @@ export default class extends Character {
       this.determineAction()
     }
     if(this.state === 'walk_right') {
-      this.body.moveRight(190)
+      this.body.moveRight(this.speed)
     } else if(this.state === 'walk_left') {
-      this.body.moveLeft(190)
+      this.body.moveLeft(this.speed)
     } else if(this.state.match(/strike/)) {
       let anim = this.animations.currentAnim
       if(anim.isFinished) {
