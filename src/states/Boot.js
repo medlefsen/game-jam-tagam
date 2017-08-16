@@ -20,6 +20,11 @@ export default class extends Phaser.State {
     let text = this.add.text(this.world.centerX, this.world.centerY, 'loading fonts', { font: '16px Arial', fill: '#dddddd', align: 'center' })
     text.anchor.setTo(0.5, 0.5)
 
+    this.load.audio('clubWhoosh1','./assets/audio/club_whoosh_1.wav')
+    this.load.audio('clubWhoosh2','./assets/audio/club_whoosh_2.wav')
+    this.load.audio('clubWhoosh3','./assets/audio/club_whoosh_3.wav')
+    this.load.audio('clubWhoosh4','./assets/audio/club_whoosh_4.wav')
+
     this.load.image('loaderBg', './assets/images/loader-bg.png')
     this.load.image('loaderBar', './assets/images/loader-bar.png')
     this.load.image('background', './assets/images/background.png')

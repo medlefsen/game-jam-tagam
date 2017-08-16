@@ -15,6 +15,7 @@ export default class extends Character {
     if(this.state === 'stationary') {
       this.state = 'strike_right'
       this.animations.play('strike_right', 30, false)
+      this.playStrikeSound()
     }
   }
 
@@ -22,6 +23,7 @@ export default class extends Character {
     if(this.state === 'stationary') {
       this.state = 'strike_left'
       this.animations.play('strike_left', 30, false)
+      this.playStrikeSound()
     }
   }
 

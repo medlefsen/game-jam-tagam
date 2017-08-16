@@ -19,6 +19,11 @@ export default class extends Phaser.Sprite {
     this.cgs = cgs
   }
 
+  playStrikeSound() {
+    const clip = this.game.rnd.between(1,4)
+    this.game.sound.play('clubWhoosh'+clip)
+  }
+
   addAnimations() {
     let animations = new Map
     let frames = this.game.cache.getFrameData(this.key).getFrames()
