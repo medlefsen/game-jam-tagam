@@ -44,6 +44,8 @@ export default class extends Phaser.State {
     healthBarOutline.drawRoundedRect(0, 0, 250, 30,5)
     this.healthBar = this.add.graphics(healthBarOutline.x+1,healthBarOutline.y+1)
 
+    this.game.input.onDown.add( this.pointerDown, this);
+    
     this.cursors = this.input.keyboard.createCursorKeys()
     this.pauseText = this.game.add.text(
       this.game.world.centerX, this.game.world.centerY-100,
@@ -99,7 +101,6 @@ export default class extends Phaser.State {
     // wait a second, then start a new wave
     if(left === 0) {
       this.waveCompleted();
-      //this.state.start('Splash',true,false,'won')
     }
   }
 
@@ -115,6 +116,19 @@ export default class extends Phaser.State {
       x: this.world.centerX + x,
       player: this.player,
     })
+    
+    let timeSlot = (side === 'left') ? this.game.rnd.pick([1,3,5,7,9,11]) : this.game.rnd.pick([2,4,6,8,10,12]);
+    timeSlot = (timeSlot * this.player.strikeTime) + 1;
+    
+    let distance = Math.abs( this.player.x - enemy.x ) - this.player.range;
+    // set speed so that the time it takes to reach the player is a multiple of the player's strike time
+    enemy.speed = Math.round( distance / timeSlot );
+    
+    // Debug:
+    //let timeToReachPlayer = distance / enemy.speed;
+    //console.log("Time to reach player from " + side + ": " + timeToReachPlayer + " swings: " + (timeToReachPlayer/this.player.strikeTime) );
+    
+    
     enemy.setCollisionGroup(this.enemyCG)
     enemy.events.onKilled.add(() => {
        this.killedEnemy(enemy)
@@ -176,5 +190,14 @@ export default class extends Phaser.State {
     return `Wave ${waveNum} Complete!
     Press Space To Pause
     Next Wave In ${timeTillNext}`;
+  }
+  
+  pointerDown( pointer ){
+    if( pointer.x > this.game.world.centerX ){
+      // click or tap on right side
+      this.player.strikeRight();
+    }else{
+      this.player.strikeLeft();
+    }
   }
 }

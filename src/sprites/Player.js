@@ -9,6 +9,10 @@ export default class extends Character {
     this.maxHealth = this.health = 100
     this.state = 'stationary'
     this.range = 110
+    let anim = this.animations.getAnimation('strike_right');
+    
+    // x2 for the reverse
+    this.strikeTime = (anim.frameTotal / anim.speed) * 2;
   }
 
   strikeRight() {

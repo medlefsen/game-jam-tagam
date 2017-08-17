@@ -7,7 +7,6 @@ export default class extends Character {
     this.checkWorldBounds = true
     this.body.collideWorldBounds = false
     this.fixedY += game.rnd.integerInRange(-20,20)
-    this.speed = game.rnd.integerInRange(160,250)
   }
 
   walkRight() {
