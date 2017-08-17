@@ -19,7 +19,7 @@ export default class extends Character {
     if(this.state === 'stationary') {
       this.state = 'strike_right'
       this.animations.play('strike_right', 30, false)
-      this.playStrikeSound()
+      this.playSound('club_whoosh')
     }
   }
 
@@ -27,24 +27,28 @@ export default class extends Character {
     if(this.state === 'stationary') {
       this.state = 'strike_left'
       this.animations.play('strike_left', 30, false)
-      this.playStrikeSound()
+      this.playSound('club_whoosh')
     }
   }
 
   damageEnemies() {
+    let hitSomething = false
     if(this.state === 'strike_left') {
       for(let enemy of this.enemies.children) {
         if (this.canHitLeft(enemy)) {
+          hitSomething = true
           enemy.hitLeft();
         }
       }
     } else {
       for(let enemy of this.enemies.children) {
         if (this.canHitRight(enemy)) {
+          hitSomething = true
           enemy.hitRight();
         }
       }
     }
+    if(hitSomething) this.playSound('club_hit')
   }
 
   update() {

@@ -7,6 +7,7 @@ export default class extends Character {
     this.checkWorldBounds = true
     this.body.collideWorldBounds = false
     this.fixedY += game.rnd.integerInRange(-20,20)
+    this.playSound('caddie_groan',0.1)
   }
 
   walkRight() {
@@ -87,6 +88,7 @@ export default class extends Character {
   }
 
   damagePlayer() {
+    this.playSound('caddie_attack_hit')
     this.player.damage(5)
   }
 }

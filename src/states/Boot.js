@@ -20,10 +20,10 @@ export default class extends Phaser.State {
     let text = this.add.text(this.world.centerX, this.world.centerY, 'loading fonts', { font: '16px Arial', fill: '#dddddd', align: 'center' })
     text.anchor.setTo(0.5, 0.5)
 
-    this.load.audio('clubWhoosh1','./assets/audio/club_whoosh_1.wav')
-    this.load.audio('clubWhoosh2','./assets/audio/club_whoosh_2.wav')
-    this.load.audio('clubWhoosh3','./assets/audio/club_whoosh_3.wav')
-    this.load.audio('clubWhoosh4','./assets/audio/club_whoosh_4.wav')
+    this.loadAudio('club_whoosh',4)
+    this.loadAudio('club_hit',5)
+    this.loadAudio('caddie_groan',9)
+    this.loadAudio('caddie_attack_hit',5)
 
     this.load.image('loaderBg', './assets/images/loader-bg.png')
     this.load.image('loaderBar', './assets/images/loader-bar.png')
@@ -46,5 +46,15 @@ export default class extends Phaser.State {
 
   fontsLoaded () {
     this.fontsReady = true
+  }
+
+  loadAudio(name,num) {
+    if(this.game.audioNumClips == null) {
+      this.game.audioNumClips = {}
+    }
+    this.game.audioNumClips[name] = num
+    for(let i = 1;i <= num; ++i) {
+      this.load.audio(name+i,'./assets/audio/'+name+'_'+i+'.wav')
+    }
   }
 }

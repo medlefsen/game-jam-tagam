@@ -19,9 +19,10 @@ export default class extends Phaser.Sprite {
     this.cgs = cgs
   }
 
-  playStrikeSound() {
-    const clip = this.game.rnd.between(1,4)
-    this.game.sound.play('clubWhoosh'+clip)
+  playSound(name,volume) {
+    if(volume == null) volume = 0.5
+    const clip = this.game.rnd.between(1,this.game.audioNumClips[name])
+    let audio = this.game.sound.play(name+clip,volume)
   }
 
   addAnimations() {
